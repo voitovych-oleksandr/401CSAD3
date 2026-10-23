@@ -1,0 +1,20 @@
+{
+  "name": "lab1-hello-world",
+  "version": "1.0.0",
+  "description": "Minimal JavaScript Hello World project with Jest tests and CI",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "build": "node -e \"const fs=require('fs'); const out='build/hello.js'; fs.mkdirSync('build',{recursive:true}); const src=fs.readFileSync('src/index.js','utf8'); fs.writeFileSync(out, '#!/usr/bin/env node\\n' + src);\"",
+    "test": "jest --runInBand"
+  },
+  "keywords": [
+    "hello-world",
+    "javascript",
+    "jest"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}
