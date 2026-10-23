@@ -59,6 +59,7 @@ The workflow must include:
 - `actions/checkout@v4`
 - `actions/setup-node@v4` with `node-version: 22`
 - a matrix strategy for the three operating systems
+- `fail-fast: false` under the matrix strategy so every OS job reports its result instead of stopping after the first failure
 - a conditional run:
   - Linux/macOS: `bash ci.sh`
   - Windows: `ci.bat`
@@ -74,10 +75,11 @@ The agent should verify that:
 2. the trigger includes both `push` and `pull_request`,
 3. branch filters include `develop` and `master`,
 4. the matrix includes all three operating systems,
-5. `actions/setup-node` uses Node 22,
-6. the workflow uploads `build/` as an artifact,
-7. the script invocation matches the host OS,
-8. the workflow does not reference secrets or protected variables.
+5. the matrix strategy sets `fail-fast: false`,
+6. `actions/setup-node` uses Node 22,
+7. the workflow uploads `build/` as an artifact,
+8. the script invocation matches the host OS,
+9. the workflow does not reference secrets or protected variables.
 
 ## If something goes wrong
 

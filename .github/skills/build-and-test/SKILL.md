@@ -78,7 +78,9 @@ The agent must:
 - use CommonJS (`require` and `module.exports`) and do not add `"type": "module"`,
 - create a build command that produces `build/hello.js` from the entry file,
 - ensure both `ci.sh` and `ci.bat` perform the same validation flow,
-- keep shell scripts simple and explicit.
+- keep shell scripts simple and explicit,
+- in `ci.bat`, call every `npm` command with `call` because Windows resolves `npm` as a `.cmd` file,
+- after each command in `ci.bat`, check `ERRORLEVEL` immediately and exit with a non-zero code if the command fails.
 
 ## Verification checklist
 
@@ -101,7 +103,8 @@ Expected result:
 
 - all tests pass,
 - the build artifact `build/hello.js` exists,
-- executing `node build/hello.js` prints the same line as `npm run start`.
+- executing `node build/hello.js` prints the same line as `npm run start`,
+- the output from `ci.bat` includes the Jest test summary and the line `Hello, World!`.
 
 ## Expected build artifact
 
